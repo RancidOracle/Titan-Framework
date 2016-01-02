@@ -29,17 +29,18 @@ class TitanFrameworkOptionRadioImage extends TitanFrameworkOption {
 		$value = $this->getValue();
 
 		// print the images
-		foreach ( $this->settings['options'] as $key => $imageURL ) {
+		foreach ( $this->settings['options'] as $key => $array ) {
 			if ( $value == '' ) {
 				$value = $key;
 			}
-			printf( '<label id="%s"><input id="%s" type="radio" name="%s" value="%s" %s/> <img src="%s" /></label>',
+			printf( '<label id="%s"><input id="%s" type="radio" name="%s" value="%s" %s> <img src="%s" title="%s"></label>',
 				$this->getID() . $key,
 				$this->getID() . $key,
 				$this->getID(),
 				esc_attr( $key ),
 				checked( $value, $key, false ),
-				esc_attr( $imageURL )
+				esc_attr( $array['image_src'] ),
+				esc_attr( $array['label'] )
 			);
 		}
 
@@ -112,7 +113,7 @@ foreach ( $this->choices as $key => $imageURL ) {
 	<span class='tf-radio-image'>
 		<label>
 			<input type="radio" name="<?php echo esc_attr( $this->id ) ?>" value="<?php echo esc_attr( $key ) ?>" <?php $this->link(); checked( $value, $key ); ?>/>
-				<img src="<?php echo esc_attr( $imageURL ) ?>"/>
+				<img src="<?php echo esc_attr( $array['image_src'] ); ?>" title="<?php echo esc_attr( $array['label'] ); ?>">
 			</input>
 		</label>
 				</span>
